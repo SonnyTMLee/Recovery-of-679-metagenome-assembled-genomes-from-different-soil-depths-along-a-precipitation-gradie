@@ -1,0 +1,20 @@
+anvi-run-workflow \
+                  -w metagenomics \
+                  -c assembly.json \
+                      --additional-params \
+                          --keep-going \
+                          --rerun-incomplete \
+                          --jobs 500 \
+                          --resources nodes=100 \
+                          --cluster \
+                             'sbatch \
+                              --partition=ksu-gen-highmem.q \
+                              --time=1-59:00:00 \
+                              --nodes=5 \
+                              --mem-per-cpu=3G \
+                              --job-name=Assembly \
+                              --mail-user-<EMAIL>\
+                              --mail-type=NONE \
+                              --output={log} \
+                              --error={log} \
+                              --ntasks={threads}'
